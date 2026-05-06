@@ -1,58 +1,128 @@
-CREATE TABLE students (
-    student_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR (50),
-    email VARCHAR (50),
-    point INT DEFAULT 0
-);
-INSERT INTO students (name , email , point) VALUES
-('Abinath', 'abinath123@gmail.com', 200),
-('Govind Raj', 'narasimhagovindraj@gmail.com', 500),
-('Brian Chew', 'BrianChew1010@gmqil.com', 800);
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MathQuest Rewards</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            margin: 0;
+            color: #333;
+        }
 
-CREATE TABLE teachers (
-    teacher_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR (50),
-    email VARCHAR (50),
-);
-INSERT INTO teachers (name , email) VALUES
-('Sivakumaran', 'Sivakumaran6767@mail.edu.apu.my'),
-('Govindamal', 'Govindamal9696@mail.edu.apu.my')
+        h1 {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+        }
 
-CREATE TABLE challenge (
-    challenge_id INT PRIMARY KEY AUTO_INCREMENT
-    title VARCHAR (50),
-    points INT
-);
+        .container {
+            width: 350px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
 
-CREATE TABLE rewards (
-    reward_id INT PRIMARY KEY AUTO_INCREMENT
-    name VARCHAR (50),
-    points_required INT
-);
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
 
-CREATE TABLE student_rewards (
-    id INT PRIMARY AUTO_INCREMENT,
-    student_id INT,
-    reward_id INT
-);
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0072ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-/linking students rewards/
+        button:hover {
+            background: #005edb;
+        }
 
-INSERT INTO students (name, points) VALUES
-('Abinath', 200),
-('Govind Raj', 500),
-('Brian Chew', 800);
+        table {
+            width: 85%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-INSERT INTO challenges (title, points) VALUES
-('Easy Quiz', 50)
-('Hard Quiz', 100);
+        th {
+            background: #0072ff;
+            color: white;
+            padding: 12px;
+        }
 
-INSERT INTO rewards (name, points_required) VALUES
-('First Step Explorer', 100),
-('Rising Rookie', 300),
-('Ultimate Legend', 1000);
+        td {
+            padding: 10px;
+            text-align: center;
+        }
 
-SELECT name, points
-FROM students
-ORDER BY points DESC;
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
 
+<h1>📐 MathQuest Rewards</h1>
+
+<div class="container">
+    <h3>Add New Reward</h3>
+
+    <form onsubmit="addReward(event)">
+        <input type="text" id="rewardName" placeholder="Reward name" required>
+        <input type="number" id="points" placeholder="Points required" required>
+        <button type="submit">Add Reward</button>
+    </form>
+</div>
+
+<table id="rewardTable">
+    <tr>
+        <th>ID</th>
+        <th>Reward</th>
+        <th>Points</th>
+    </tr>
+
+    <!-- Math-Themed Rewards -->
+    <tr><td>1</td><td>➕ Bonus Point Boost</td><td>20</td></tr>
+    <tr><td>2</td><td>🧠 Genius Mode Unlock</td><td>100</td></tr>
+    <tr><td>3</td><td>📊 Double XP (Solve Faster)</td><td>80</td></tr>
+    <tr><td>4</td><td>📝 Skip One Question Pass</td><td>50</td></tr>
+    <tr><td>5</td><td>⏱️ Extra Time Token</td><td>40</td></tr>
+    <tr><td>6</td><td>🎯 Perfect Score Badge</td><td>120</td></tr>
+    <tr><td>7</td><td>🔢 Hint Unlock (Next Question)</td><td>30</td></tr>
+</table>
+
+<script>
+let rewardId = 8;
+
+function addReward(event) {
+    event.preventDefault();
+
+    let name = document.getElementById("rewardName").value;
+    let points = document.getElementById("points").value;
+
+    let table = document.getElementById("rewardTable");
+    let row = table.insertRow();
+
+    row.insertCell(0).innerText = rewardId++;
+    row.insertCell(1).innerText = name;
+    row.insertCell(2).innerText = points;
+
+    document.querySelector("form").reset();
+}
+</script>
+
+</body>
+</html>
